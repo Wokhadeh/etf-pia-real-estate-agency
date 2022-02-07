@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose  from 'mongoose';
 import userRouter from './routes/user.routes';
+import realEstateRouter from './routes/realEstate.routes';
 
 
 const app = express();
@@ -10,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 //static server
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 //
 
@@ -25,6 +26,7 @@ connection.once('open',()=>{
 // router
 const router=express.Router();
 router.use('/users',userRouter);
+router.use('/realEstates',realEstateRouter);
 
 
 app.use('/',router);

@@ -19,8 +19,14 @@ const upload = multer_1.default({
     storage: storage
 });
 const userRouter = express_1.default.Router();
-userRouter.route('/allUsers').get((req, res) => new user_controller_1.UserController().getAllUserRequests(req, res));
+userRouter.route('/allUserRequests').get((req, res) => new user_controller_1.UserController().getAllUserRequests(req, res));
 userRouter.route('/register').post((req, res) => new user_controller_1.UserController().register(req, res));
 userRouter.route('/uploadAvatar').post(upload.single('avatar'), (req, res) => new user_controller_1.UserController().uploadAvatar(req, res));
+userRouter.route('/login').post((req, res) => new user_controller_1.UserController().login(req, res));
+userRouter.route('/delete').post((req, res) => new user_controller_1.UserController().deleteUser(req, res));
+userRouter.route('/').put((req, res) => new user_controller_1.UserController().acceptUser(req, res));
+userRouter.route('/').post((req, res) => new user_controller_1.UserController().getUser(req, res));
+userRouter.route('/update').post((req, res) => new user_controller_1.UserController().updateUser(req, res));
+userRouter.route('/changePass').post((req, res) => new user_controller_1.UserController().changePass(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map

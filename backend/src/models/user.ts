@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
-let UserRequest = new Schema(
+let User = new Schema(
     {
         firstName: {
             type: String
@@ -19,16 +19,20 @@ let UserRequest = new Schema(
             type: String
         },
         city: {
-            type:String
+            type: String
         },
         country: {
-            type:String
+            type: String
         },
         avatar: {
+            type: Boolean
+        },
+        type: {
             type: String
+        },
+        approved: {
+            type: Boolean
         }
-
-
     }
 )
-export default mongoose.model("UserRequest",UserRequest,"userRequests");
+export default mongoose.model("User", User, "users");
