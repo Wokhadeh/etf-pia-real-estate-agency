@@ -1,0 +1,34 @@
+<div *ngIf='user' class="container">
+    <form #passChangeForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" [(ngModel)]="password" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>New password</mat-label>
+            <input matInput type="password" name="newPassword" [(ngModel)]="newPassword"
+                (ngModelChange)="validatePass()" #pass="ngModel" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Confirm password</mat-label>
+            <input matInput type="password" name="confirmPassword" [(ngModel)]="confirmPassword" #confPass="ngModel"
+                required>
+        </mat-form-field>
+        <br>
+        <button type="button"
+            [disabled]="passChangeForm.invalid || !validPassword || (pass.value!=confPass.value) || (password!=user.password)"
+            (click)="changePassword()" mat-raised-button>Change password</button>
+    </form>
+    <mat-error *ngIf="pass.value!=confPass.value && pass.dirty && confPass.dirty">
+        Passwords dont match!
+    </mat-error>
+    <mat-error *ngIf="!validPassword">
+        Password must be between 8 and 30 characters. <br>
+        Password must contain at least one uppercase letter, one lowercase letter, one number and one special
+        character. <br>
+        Maximum number of same character in a row is 3. <br>
+    </mat-error>
+
+</div>

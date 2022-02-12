@@ -1,0 +1,70 @@
+<div *ngIf="myOffers">
+    <div class="mat-headline">My offers</div>
+    <div class="mat-title" *ngIf="msg">{{msg}}</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Real estate ID</th>
+                <th scope="col">Real estate link</th>
+                <th scope="col">Offeror</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let offer of myOffers">
+                <td>
+                    {{offer.realEstateId}}
+
+                </td>
+                <td>
+                    <button mat-button (click)="goToDetails(offer.realEstateId)">Details</button>
+                </td>
+                <td>
+                    {{offer.offeror}}
+                </td>
+                <td>
+                    {{offer.price}} $
+                </td>
+                <td>
+                 
+                        <button type="button" mat-raised-button (click)="accept(offer)">Accept</button>
+                </td>
+                <td>
+                        <button type="button" mat-raised-button (click)="decline(offer)">Decline</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="mat-headline"> Accepted offers </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Real estate ID</th>
+                <th scope="col">Real estate link</th>
+                <th scope="col">Offeror</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let offer of acceptedOffers">
+                <td>
+                    {{offer.realEstateId}}
+
+                </td>
+                <td>
+                    <button mat-button (click)="goToDetails(re.id)">Details</button>
+                </td>
+                <td>
+                    {{offer.offeror}}
+                </td>
+                <td>
+                    {{offer.price}} $
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

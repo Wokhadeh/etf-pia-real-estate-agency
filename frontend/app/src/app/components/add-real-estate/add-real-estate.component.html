@@ -1,0 +1,92 @@
+<div *ngIf='user' class="container">
+    <div class="mat-headline">
+        Add real estate
+    </div>
+    <form class="example-form" #addForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Short description</mat-label>
+            <textarea matInput name="desc" placeholder="House, two floors ..." [(ngModel)]="realEstate.description"
+                required></textarea>
+        </mat-form-field>
+        <button type="button" mat-raised-button (click)="fileInput.click()" id="addImgButton">Add images</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file" multiple="multiple" id="file"
+            accept=".png,.jpg,.jpeg">
+        <br>
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput name="adress" type="text" [(ngModel)]="realEstate.address" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>City/town</mat-label>
+            <input matInput type="text" name="city" [(ngModel)]="realEstate.city" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Muncipality</mat-label>
+            <input matInput type="text" name="muncipality" [(ngModel)]="realEstate.muncipality" required>
+        </mat-form-field>
+        <br>
+        <mat-radio-group [(ngModel)]="realEstate.type" name="type" required>
+            <mat-radio-button value="house">House</mat-radio-button>
+            <mat-radio-button value="apartment">Apartment</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="realEstate.type == 'house'">
+            <mat-form-field>
+                <mat-label>
+                    Number of floors
+                </mat-label>
+                <input matInput type="number" min="1" name="numOfFloors" [(ngModel)]="realEstate.numOfFloors" required>
+            </mat-form-field>
+        </div>
+        <div *ngIf="realEstate.type == 'apartment'">
+            <mat-form-field>
+                <mat-label>
+                    Floor
+                </mat-label>
+                <input matInput type="number" min="0" name="floor" [(ngModel)]="realEstate.floor" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>
+                    Number of floors of a building
+                </mat-label>
+                <input matInput type="number" min="1" name="numFloors" [(ngModel)]="realEstate.numOfFloors" required>
+            </mat-form-field>
+        </div>
+        <br>
+        <mat-checkbox name="furnished" [(ngModel)]="realEstate.furnished"> Furnished </mat-checkbox>
+        <br>
+
+        <mat-radio-group [(ngModel)]="realEstate.typeSale" name="typeSale">
+            <mat-radio-button value="rent">Rent</mat-radio-button>
+            <mat-radio-button value="sale">Sale</mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <mat-form-field>
+            <mat-label>
+                Number of rooms
+            </mat-label>
+            <input matInput type="number" min="1" name="rooms" [(ngModel)]="realEstate.numOfRooms" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Squar footage (m^2)
+            </mat-label>
+            <input matInput type="number" min="1" name="sqrFoot" [(ngModel)]="realEstate.squareFootage" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>
+                Price ($)
+            </mat-label>
+            <input matInput type="number" min="1" name="price" [(ngModel)]="realEstate.price" required>
+        </mat-form-field>
+        <br>
+        <button type="button" [disabled]="!addForm.valid || !photos" mat-raised-button
+            (click)="addRealEstate()">Add</button>
+    </form>
+    <mat-error *ngIf="errMsg">
+        {{errMsg}}
+    </mat-error>
+    <div *ngIf="succMsg" style="color: green;">
+        {{succMsg}}
+    </div>
+</div>

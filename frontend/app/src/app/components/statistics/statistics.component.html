@@ -1,0 +1,26 @@
+<div *ngIf='user'>
+    <div *ngIf="user.type=='agent' || user.type=='admin'">
+        <div class="container">
+            <div class="mat-headline">Statistics</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <canvas id="priceChart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="citiesChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <canvas id="typeHouseChart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="typeApartmentChart" width="400" height="400"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

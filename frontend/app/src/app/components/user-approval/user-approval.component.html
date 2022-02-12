@@ -1,0 +1,39 @@
+<div class="mat-headline">Approve user requests</div>
+<div class="mat-title" *ngIf="msg">{{msg}}</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Type</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+    <tr *ngFor="let ur of userRequsets">
+        <td>
+            {{ur.username}}
+        
+        </td>
+        <td>
+            {{ur.email}}
+        </td>
+        <td>
+            <mat-form-field>
+            <mat-select [(value)]=ur.type>
+                <mat-option selected value="user">User</mat-option>
+                <mat-option value="agent">Agent</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        </td>
+        <td>
+            <button type="button" mat-raised-button (click)="acceptUser(ur.username,ur.type)">Accept</button>    
+        </td>
+        <td>
+            <button type="button" mat-raised-button (click)="declineUser(ur.username)">Decline</button>    
+        </td>
+    </tr>
+</tbody>
+</table>

@@ -1,0 +1,21 @@
+<div *ngIf="realEstate">
+  <mat-card class="example-card">
+    <img mat-card-image class="restrict-height" src="http://localhost:4000/img/realEstates/{{realEstate.id}}/photo{{numOfPhoto}}.jpeg">
+    <br>
+    <mat-card-content>
+      <b>City and muncipality:</b> {{realEstate.city}} , {{realEstate.muncipality}}
+      <br>
+      <b>Price:</b> {{realEstate.price}} $
+      <br>
+      <b>Type:</b> {{realEstate.type}}
+      <br>
+      <b>Square footage:</b> {{realEstate.squareFootage}} m<sup>2</sup>
+      <br>
+      <div *ngIf="realEstate.typeSale=='sale'"><b>For sale</b></div>
+      <div *ngIf="realEstate.typeSale=='rent'"><b>For rent</b></div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="goToDetails()">Details</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

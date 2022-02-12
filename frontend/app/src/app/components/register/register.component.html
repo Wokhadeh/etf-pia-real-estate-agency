@@ -1,0 +1,75 @@
+<div class='container'>
+
+    <div class="mat-headline">Create a new profile</div>
+    <hr>
+    <form #registerForm="ngForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Firstname</mat-label>
+            <input matInput [(ngModel)]="userRequest.firstName" name="firstName" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Lastname</mat-label>
+            <input matInput [(ngModel)]="userRequest.lastName" name="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="userRequest.username" name="username" required>
+        </mat-form-field>
+        <button type="button" class="button" mat-raised-button (click)="fileInput.click()"
+            id="addImgButton">Add profile picture</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" accept=".png,.jpg,.jpeg">
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" [(ngModel)]="userRequest.password"
+                (ngModelChange)="validatePass()" #pass="ngModel" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Confirm password</mat-label>
+            <input matInput type="password" name="confirmPass" [(ngModel)]="confirmPassword" #confirmPass="ngModel"
+                required>
+        </mat-form-field>
+        <br>
+        <mat-error *ngIf="!validPassword">
+            Password must be between 8 and 30 characters. <br>
+            Password must contain at least one uppercase letter, one lowercase letter, one number and one special
+            character. <br>
+            Maximum number of same character in a row is 3. <br>
+        </mat-error>
+        <mat-form-field class="example-full-width">
+            <mat-label>Country</mat-label>
+            <mat-select [(value)]=countryCode (valueChange)="updateCities()" required>
+                <mat-option *ngFor="let country of listOfCountries" [value]="country.isoCode">
+                    {{country.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>City</mat-label>
+            <mat-select [(value)]=userRequest.city>
+                <mat-option *ngFor="let city of listOfCities" [value]="city.name">
+                    {{city.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email" [(ngModel)]="userRequest.email" (ngModelChange)="validateEmail()"
+                required>
+        </mat-form-field>
+        <br>
+        <mat-error *ngIf="!validEmail">
+            Invalid email format!
+            <br>
+        </mat-error>
+        <button  type="button"
+            [disabled]="registerForm.invalid || !validPassword || !validEmail || pass.value!=confirmPass.value"
+            (click)="register()" mat-raised-button>Register</button>
+        <mat-error *ngIf="errorMsg">
+            {{errorMsg}}
+        </mat-error>
+    </form>
+
+</div>

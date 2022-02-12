@@ -1,0 +1,58 @@
+<div class="mat-headline">My real estates</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Owner</th>
+        <th scope="col">City and muncipality</th>
+        <th scope="col">Type</th>
+        <th scope="col">Square footage</th>
+        <th scope="col">Rent/sale</th>
+        <th scope="col">Promoted</th>
+        <th scope="col">Approved</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+    <tr *ngFor="let re of userRealEstates">
+        <td>
+            {{re.owner}}
+        
+        </td>
+        <td>
+            {{re.city}}, {{re.muncipality}}
+        </td>
+        <td>
+            {{re.type}}
+        </td>
+        <td>
+            {{re.squareFootage}}
+        </td>
+        <td>
+            {{re.typeSale}}
+        </td>
+        <td>
+            <div *ngIf="re.promoted">
+                <mat-icon>check</mat-icon>
+            </div>
+            <div *ngIf="!re.promoted">
+                <mat-icon>close</mat-icon>
+            </div>
+        </td>
+        <td>
+            <div *ngIf="re.approved">
+                <mat-icon>check</mat-icon>
+            </div>
+            <div *ngIf="!re.approved">
+                <mat-icon>close</mat-icon>
+            </div>
+        </td>
+        <td>
+            <button mat-button (click)="goToDetails(re.id)">Details</button>
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</tbody>
+</table>

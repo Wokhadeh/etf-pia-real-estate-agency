@@ -1,0 +1,45 @@
+<div class="mat-headline">Approve real estates</div>
+<div class="mat-title" *ngIf="msg">{{msg}}</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Owner</th>
+        <th scope="col">City and muncipality</th>
+        <th scope="col">Type</th>
+        <th scope="col">Square footage</th>
+        <th scope="col">Rent/sale</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+    <tr *ngFor="let re of notApprovedRealEstates">
+        <td>
+            {{re.owner}}
+        
+        </td>
+        <td>
+            {{re.city}}, {{re.muncipality}}
+        </td>
+        <td>
+            {{re.type}}
+        </td>
+        <td>
+            {{re.squareFootage}}
+        </td>
+        <td>
+            {{re.typeSale}}
+        </td>
+        <td>
+            <button mat-button (click)="goToDetails(re.id)">Details</button>
+        </td>
+        <td>
+            <button type="button" mat-raised-button (click)="accept(re.id)">Accept</button>    
+        </td>
+        <td>
+            <button type="button" mat-raised-button (click)="decline(re.id)">Decline</button>
+        </td>
+    </tr>
+</tbody>
+</table>

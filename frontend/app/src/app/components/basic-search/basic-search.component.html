@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="mat-headline">Search</div>
+    <hr>
+    <form>
+        <mat-form-field class="example-full-width">
+            <mat-label>Country</mat-label>
+            <mat-select [(value)]=countryCode (valueChange)="updateCities()">
+                <mat-option *ngFor="let country of listOfCountries" [value]="country.isoCode">
+                    {{country.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>City</mat-label>
+            <mat-select name="selectedCity" [(ngModel)]=city #selectedCity="ngModel">
+                <mat-option *ngFor="let city of listOfCities" [value]="city.name">
+                    {{city.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Minimum price</mat-label>
+            <input matInput type="number" name="minPrice" [(ngModel)]="minPrice" #minP="ngModel">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Maximum price</mat-label>
+            <input matInput type="number" name="maxPrice" [(ngModel)]="maxPrice" #maxP="ngModel">
+        </mat-form-field>
+        <br>
+        <button type="button" (click)="search()" [disabled]="!minP.dirty && !maxP.dirty && !selectedCity.dirty"
+            mat-raised-button>
+            <mat-icon>search</mat-icon>Search
+        </button>
+    </form>
+    <hr>
+</div>
+<div *ngIf="realEstates" class="container">
+    <div class="row">
+        <div *ngFor="let re of realEstates" class="col-4">
+            <app-real-estate-card [realEstate]="re"></app-real-estate-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<div *ngIf="realEstate">
+    <div class="container">
+        <div class="row featurette">
+            <div *ngIf="!changeData" class="col-md-7">
+                <div class="mat-title">
+                    Description:
+                </div>
+                <div class="mat-body">
+                    {{realEstate.description}}
+                    <br>
+                </div>
+                <hr>
+                <div class="mat-title">
+                    City and muncipality:
+                    <div class="mat-body">{{realEstate.city}}, {{realEstate.muncipality}} </div>
+                </div>
+                <div class="mat-title">
+                    Address:
+                    <div class="mat-body">{{realEstate.address}}</div>
+                </div>
+                <hr>
+                <span class="mat-title">Type: </span> <span class="mat-body">{{realEstate.type}}</span>
+                <div *ngIf="realEstate.type=='house'">
+                    <span class="mat-title">Number of floors :</span> <span class="mat-body"> {{realEstate.numOfFloors}}
+                    </span>
+                </div>
+                <div *ngIf="realEstate.type=='apartment'">
+                    <span class="mat-title">Number of floors of a building: </span> <span class="mat-body">
+                        {{realEstate.numOfFloors}} </span>
+                    <br>
+                    <span class="mat-title">Floor: </span> <span class="mat-body">{{realEstate.floor}}</span>
+                </div>
+                <span class="mat-title">Square footage:</span> <span class="mat-body"> {{realEstate.squareFootage}} m<sup>2</sup>
+                </span>
+                <br>
+                <span class="mat-title">Number of rooms: </span> <span class="mat-body">{{realEstate.numOfRooms}}
+                </span>
+                <hr>
+
+
+                <span class="mat-title">Owner: </span> <span class="mat-body">{{realEstate.owner}}</span>
+            </div>
+            <div *ngIf="changeData" class="col-md-7">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Short description</mat-label>
+                    <textarea matInput name="desc" placeholder="House, two floors ..." [(ngModel)]="realEstate.description"
+                        required></textarea>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>
+                        Price ($)
+                    </mat-label>
+                    <input matInput type="number" min="1" name="price" [(ngModel)]="realEstate.price" required>
+                </mat-form-field>
+                <br>
+
+                <mat-radio-group [(ngModel)]="realEstate.typeSale" name="typeSale">
+                    <mat-radio-button value="rent">Rent</mat-radio-button>
+                    <mat-radio-button value="sale">Sale</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <button type="button" mat-raised-button (click)="save();changeData=false">Save</button>
+
+            </div>
+            <div class="col-md-5">
+                <img src="http://localhost:4000/img/realEstates/{{realEstate.id}}/photo{{cnt}}.jpeg" (click)='inc()'
+                    class="img-fluid">
+                <hr>
+                <div *ngIf="realEstate.typeSale=='sale'">
+                    <div class="mat-title">Price: </div>
+                    <span class="mat-display-3">{{realEstate.price}} $ </span>
+                    <hr>
+                    <div *ngIf='user'>
+                        <div *ngIf="realEstate.owner!=user.username && user.type=='user'">
+                            <button type="button" mat-raised-button (click)="sendOffer(false)">Buy</button>
+                            <button type="button" mat-raised-button (click)="sendOffer(true)">Buy (credit)</button>
+                            <div class="mat-small">( Credit interest is 20 % )</div>
+                        </div>
+                        <div
+                            *ngIf="realEstate.owner==user.username || (realEstate.owner=='agency' && user.type=='agent')">
+                            <button type="button" mat-raised-button (click)="delete()">Delete</button>
+                            <button type="button" mat-raised-button (click)="changeData=true">Change data</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="realEstate.typeSale=='rent'">
+                    <div *ngIf='user'>
+                        <div
+                            *ngIf="realEstate.owner==user.username || (realEstate.owner=='agency' && user.type=='agent')">
+                            <button type="button" mat-raised-button (click)="delete()">Delete</button>
+                            <button type="button" mat-raised-button (click)="changeData=true">Change data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
